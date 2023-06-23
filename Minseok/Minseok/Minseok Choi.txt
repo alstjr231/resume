@@ -1,0 +1,58 @@
+﻿---
+name: Minseok
+surname: Choi
+position: "Student"
+address: "School of finance
+phone: +82 01022612053
+email: "justin3111@naver.com"
+github: IronMan
+date: "`r format(Sys.time(), '%B %Y')`"
+output:
+  vitae::awesomecv:
+    page_total: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+# Some stuff about me
+
+ * 6month experience of research assistant at Samsung securities.
+ * Member of HYFE
+ * CFA research Challenge prize winner.
+
+# Education
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "Informal studies", "2016-2023", "Hanyang University", "Seoul, Korea",
+ 
+) %>%
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+# 
+```{r}
+tribble(
+  ~Year, ~Type, ~Desc,
+) %>%
+  brief_entries(
+    glue::glue("Nobel Prize in {Type}"),
+    Year,
+    Desc
+  )
+```
+
+# Publications
+
+```{r}
+library(dplyr)
+knitr::write_bib(c("vitae", "tibble"), "packages.bib")
+
+bibliography_entries("packages.bib") %>%
+  arrange(desc(author$family), issued)
+```
